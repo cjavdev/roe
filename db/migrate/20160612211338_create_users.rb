@@ -1,13 +1,13 @@
 class CreateUsers < ActiveRecord::Migration
   def change
     create_table :users do |t|
-      t.string :email
-      t.string :provider
-      t.string :uid
-      t.string :first_name
-      t.string :last_name
-      t.string :oauth_token
-      t.datetime :oauth_expires_at
+      t.string :email, null: false, index: true
+      t.string :provider, null: false
+      t.string :uid, null: false, index: true
+      t.string :first_name, null: false
+      t.string :last_name, null: false
+      t.string :oauth_token, null: false
+      t.datetime :oauth_expires_at, null: false
 
       t.timestamps null: false
     end
