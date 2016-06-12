@@ -1,0 +1,48 @@
+<% action = (@item.persisted? ? item_path(@item) : items_path) %>
+<div class="row">
+  <div class="col-md-6">
+    <div class="box box-warning">
+      <div class="box-header with-border">
+        <h3 class="box-title">Item Details</h3>
+      </div>
+      <div class="box-body">
+        <form action="<%= action %>" method="POST" role="form">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <% if @item.persisted? %>
+            <input type="hidden" name="_method" value="PATCH" />
+          <% end %>
+          <div class="form-group">
+            <label>Name</label>
+            <input name="item[name]" type="text" class="form-control" placeholder="Randy">
+          </div>
+
+          <div class="form-group">
+            <label>Description</label>
+            <textarea name="item[description]" class="form-control" rows="3" placeholder="Nice Leggings ;) ..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <div class="radio">
+              <label>
+                <input type="radio" name="item[public]" id="optionsRadios1" value="true" checked="">
+                <strong>Public</strong> (Buy this!)
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="item[public]" id="optionsRadios2" value="false">
+                <strong>Private</strong> (This one's a secret ;))
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <button class="btn btn-success">
+              Save!
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
