@@ -1,5 +1,11 @@
 <h1>RoeMe Inventory</h1>
 
+<div class="form-group">
+  <a href="<%= new_item_path %>" class="btn btn-primary">
+    Add Item
+  </a>
+</div>
+
 <ul class="list-group">
   <% @items.each do |item| %>
     <li class="list-group-item">

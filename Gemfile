@@ -35,6 +35,7 @@ group :development, :test do
   gem 'annotate'
   gem 'byebug'
   gem 'figaro'
+  gem 'quiet_assets'
 end
 
 group :development do
