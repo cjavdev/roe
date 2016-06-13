@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'sales/new'
+
+  get 'sales/index'
+
   root to: 'static_pages#root'
   get 'welcome', to: 'static_pages#welcome'
   get 'login', to: 'static_pages#login'

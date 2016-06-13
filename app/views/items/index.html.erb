@@ -12,21 +12,51 @@
       </a>
     </div>
 
-    <ul class="list-group">
-      <% @items.each do |item| %>
-        <li class="list-group-item">
-          <%= link_to item.name, item %>
-          <% ItemSize.sizes.keys.each do |size| %>
-            <span class="label">
-              <%= size %><%= item.sizes.where(size: size).count %>
-            </span>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th width="90"></th>
+          <th>Name</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @items.each do |item| %>
+          <tr>
+            <td>
+              <a href="<%= item_path(item) %>">
+                <img src="<%= item.photo.url(:thumb) %>" class="img-circle">
+              </a>
+            </td>
+            <td>
+              <%= link_to item.name, item %>
+            </td>
+            <td>
+            <% ItemSize.sizes.each do |size, id| %>
+              <% next unless item.sizes.where(size: id).exists? %>
+              <span class="label label-info">
+                <%= size %> <%= item.sizes.where(size: id).count %>
+              </span>
+            <% end %>
+            </td>
+            <td>
+              <form action="<%= item_path(item) %>" method="post">
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                <input type="hidden" name="_method" value="DELETE" />
 
-    <a href="<%= new_item_path %>" class="btn btn-primary">
-      Add Item
-    </a>
+                <button class="btn btn-danger btn-sm">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div class="form-group">
+      <a href="<%= new_item_path %>" class="btn btn-primary">
+        Add Item
+      </a>
+    </div>
   </div>
 </div>

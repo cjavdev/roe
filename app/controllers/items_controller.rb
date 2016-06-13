@@ -48,6 +48,13 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
+  def destroy
+    @item = current_user.items.find(params[:id])
+    @item.archived = true
+    @item.save
+    redirect_to items_path
+  end
+
   private
 
   def item_params

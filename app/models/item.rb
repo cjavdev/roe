@@ -22,9 +22,11 @@ class Item < ActiveRecord::Base
   belongs_to :consultant, class_name: 'User'
   has_many :sizes, class_name: 'ItemSize'
 
+  default_scope { where(archived: false) }
+
   # This method associates the attribute ":avatar" with a file attachment
   has_attached_file :photo, styles: {
-    thumb: '100x100>',
+    thumb: '80x80#',
     square: '300x300#',
     medium: '400x400>'
   }

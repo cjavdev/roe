@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160612232918) do
+ActiveRecord::Schema.define(version: 20160613043204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,23 @@ ActiveRecord::Schema.define(version: 20160612232918) do
   add_index "collections", ["title"], name: "index_collections_on_title", using: :btree
   add_index "collections", ["user_id"], name: "index_collections_on_user_id", using: :btree
 
+  create_table "customers", force: :cascade do |t|
+    t.string   "name"
+    t.string   "address_one"
+    t.string   "address_two"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.string   "email"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "customers", ["email"], name: "index_customers_on_email", using: :btree
+  add_index "customers", ["name"], name: "index_customers_on_name", using: :btree
+  add_index "customers", ["user_id"], name: "index_customers_on_user_id", using: :btree
+
   create_table "item_sizes", force: :cascade do |t|
     t.integer  "item_id",                    null: false
     t.integer  "size",       default: 0,     null: false
@@ -46,14 +63,15 @@ ActiveRecord::Schema.define(version: 20160612232918) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
-    t.string   "name",                              null: false
-    t.integer  "user_id",                           null: false
+    t.string   "name",                               null: false
+    t.integer  "user_id",                            null: false
     t.integer  "collection_id"
     t.boolean  "public",             default: true
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.text     "description"
     t.string   "color"
+    t.boolean  "archived",           default: false
   end
 
   add_index "items", ["collection_id"], name: "index_items_on_collection_id", using: :btree
