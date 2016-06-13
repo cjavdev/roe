@@ -6,4 +6,10 @@ class StaticPagesController < ApplicationController
   def welcome
     render :welcome, layout: false
   end
+
+  def privacy
+  end
+
+  def terms
+  end
 end
