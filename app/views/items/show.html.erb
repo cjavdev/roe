@@ -1,46 +1,59 @@
-<div class="col-md-4">
-  <img src="<%= @item.photo.url(:medium) %>">
+<div class="box box-default color-palette-box">
+  <div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-tag"></i> <%= @item.name %></h3>
+  </div>
+  <div class="box-body">
+    <div class="row">
+      <div class="col-md-4">
+        <img src="<%= @item.photo.url(:medium) %>">
+      </div>
+
+      <div class="col-md-4">
+        <%= link_to "Edit", edit_item_path(@item) %>
+        <h1><%= @item.name %></h1>
+        <p><%= @item.description %></p>
+      </div>
+
+      <div class="col-md-4">
+        <h4>Sizes</h4>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Size</th>
+              <th>Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% ItemSize.sizes.each do |size, id| %>
+              <tr>
+                <td><strong><%= size %></strong></td>
+                <td>
+                  <form action="<%= item_path(@item) %>/remove_size" method="post" style="display: inline">
+                    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="size_id" value="<%= id %>">
+                    <button class="btn btn-success btn-sm">
+                      <i class="fa fa-minus"></i>
+                    </button>
+                  </form>
+                  <%= @item.sizes.where(size: id).count %>
+                  <form action="<%= item_path(@item) %>/add_size" method="post" style="display: inline">
+                    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                    <input type="hidden" name="size_id" value="<%= id %>">
+                    <button class="btn btn-success btn-sm">
+                      <i class="fa fa-plus"></i>
+                    </button>
+                  </form>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.box-body -->
 </div>
 
-<div class="col-md-4">
-  <%= link_to "Edit", edit_item_path(@item) %>
-  <h1><%= @item.name %></h1>
-  <p><%= @item.description %></p>
-</div>
 
-<div class="col-md-4">
-  <h4>Sizes</h4>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Size</th>
-        <th>Quantity</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% ItemSize.sizes.each do |size, id| %>
-        <tr>
-          <td><strong><%= size %></strong></td>
-          <td>
-            <form action="<%= item_path(@item) %>/remove_size" method="post" style="display: inline">
-              <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-              <input type="hidden" name="_method" value="DELETE">
-              <input type="hidden" name="size_id" value="<%= id %>">
-              <button class="btn btn-success btn-sm">
-                <i class="fa fa-minus"></i>
-              </button>
-            </form>
-            <%= @item.sizes.where(size: id).count %>
-            <form action="<%= item_path(@item) %>/add_size" method="post" style="display: inline">
-              <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-              <input type="hidden" name="size_id" value="<%= id %>">
-              <button class="btn btn-success btn-sm">
-                <i class="fa fa-plus"></i>
-              </button>
-            </form>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
