@@ -1,24 +1,32 @@
-<h1>RoeMe Inventory</h1>
+<div class="box box-default color-palette-box">
+  <div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-tag"></i> Items</h3>
+  </div>
+  <div class="box-body">
 
-<div class="form-group">
-  <a href="<%= new_item_path %>" class="btn btn-primary">
-    Add Item
-  </a>
-</div>
+    <h1>My Inventory</h1>
 
-<ul class="list-group">
-  <% @items.each do |item| %>
-    <li class="list-group-item">
-      <%= link_to item.name, item %>
-      <% ItemSize.sizes.keys.each do |size| %>
-        <span class="label">
-          <%= size %><%= item.sizes.where(size: size).count %>
-        </span>
+    <div class="form-group">
+      <a href="<%= new_item_path %>" class="btn btn-primary">
+        Add Item
+      </a>
+    </div>
+
+    <ul class="list-group">
+      <% @items.each do |item| %>
+        <li class="list-group-item">
+          <%= link_to item.name, item %>
+          <% ItemSize.sizes.keys.each do |size| %>
+            <span class="label">
+              <%= size %><%= item.sizes.where(size: size).count %>
+            </span>
+          <% end %>
+        </li>
       <% end %>
-    </li>
-  <% end %>
-</ul>
+    </ul>
 
-<a href="<%= new_item_path %>" class="btn btn-primary">
-  Add Item
-</a>
+    <a href="<%= new_item_path %>" class="btn btn-primary">
+      Add Item
+    </a>
+  </div>
+</div>
