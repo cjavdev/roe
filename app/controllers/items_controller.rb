@@ -10,6 +10,15 @@ class ItemsController < ApplicationController
     redirect_to @item
   end
 
+  def sell
+    @item = current_user.items.find(params[:id])
+    @item.sizes.where(size: params[:size_id]).first.try(:delete)
+    @sale = Sale.create(
+      items: [@item]
+    )
+    redirect_to @item
+  end
+
   def remove_size
     @item = current_user.items.find(params[:id])
     @item.sizes.where(size: params[:size_id]).first.try(:delete)

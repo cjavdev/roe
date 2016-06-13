@@ -8,10 +8,12 @@ Rails.application.routes.draw do
   resources :items do
     member do
       post 'add_size', to: 'items#add_size'
+      post 'sell', to: 'items#sell'
       delete 'remove_size', to: 'items#remove_size'
     end
   end
   resources :sales
+  resources :customers
 
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')

@@ -17,4 +17,5 @@
 
 class Customer < ActiveRecord::Base
   has_many :items
+  belongs_to :consultant, class_name: 'User'
 end

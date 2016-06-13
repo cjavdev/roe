@@ -21,6 +21,7 @@
             <tr>
               <th>Size</th>
               <th>Quantity</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -32,7 +33,7 @@
                     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
                     <input type="hidden" name="_method" value="DELETE">
                     <input type="hidden" name="size_id" value="<%= id %>">
-                    <button class="btn btn-success btn-sm">
+                    <button class="btn btn-default btn-sm">
                       <i class="fa fa-minus"></i>
                     </button>
                   </form>
@@ -40,8 +41,17 @@
                   <form action="<%= item_path(@item) %>/add_size" method="post" style="display: inline">
                     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
                     <input type="hidden" name="size_id" value="<%= id %>">
-                    <button class="btn btn-success btn-sm">
+                    <button class="btn btn-default btn-sm">
                       <i class="fa fa-plus"></i>
+                    </button>
+                  </form>
+                </td>
+                <td>
+                  <form action="<%= item_path(@item) %>/sell" method="post" style="display: inline">
+                    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                    <input type="hidden" name="size_id" value="<%= id %>">
+                    <button class="btn btn-success btn-sm">
+                      Sell!
                     </button>
                   </form>
                 </td>

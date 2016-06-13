@@ -1,0 +1,17 @@
+<% action = (@customer.persisted? ? customer_path(@customer) : customers_path) %>
+<form action="<%= action %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <% if @customer.persisted? %>
+    <input type="hidden" name="_method" value="PATCH">
+  <% end %>
+
+  <div class="form-group">
+    <label>Name<br>
+      <input type="text" class="form-control" name="customer[name]" value="<%= @customer.name %>">
+    </label>
+  </div>
+
+  <div class="form-group">
+    <button type="submit">Save</button>
+  </div>
+</form>
