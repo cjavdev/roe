@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'sales/new'
-
-  get 'sales/index'
-
   root to: 'static_pages#root'
   get 'welcome', to: 'static_pages#welcome'
   get 'login', to: 'static_pages#login'
@@ -15,6 +11,7 @@ Rails.application.routes.draw do
       delete 'remove_size', to: 'items#remove_size'
     end
   end
+  resources :sales
 
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')

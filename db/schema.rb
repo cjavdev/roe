@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160613043204) do
+ActiveRecord::Schema.define(version: 20160613044000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,24 @@ ActiveRecord::Schema.define(version: 20160613043204) do
   add_index "items", ["collection_id"], name: "index_items_on_collection_id", using: :btree
   add_index "items", ["name"], name: "index_items_on_name", using: :btree
   add_index "items", ["user_id"], name: "index_items_on_user_id", using: :btree
+
+  create_table "sale_items", force: :cascade do |t|
+    t.integer  "sale_id",    null: false
+    t.integer  "item_id",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "sale_items", ["item_id"], name: "index_sale_items_on_item_id", using: :btree
+  add_index "sale_items", ["sale_id", "item_id"], name: "index_sale_items_on_sale_id_and_item_id", using: :btree
+  add_index "sale_items", ["sale_id"], name: "index_sale_items_on_sale_id", using: :btree
+
+  create_table "sales", force: :cascade do |t|
+    t.integer  "customer_id"
+    t.boolean  "paid"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",            null: false

@@ -16,6 +16,7 @@
 
 class User < ActiveRecord::Base
   has_many :items, inverse_of: :consultant
+  has_many :sales, through: :items, source: :sales
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|

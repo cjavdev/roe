@@ -15,12 +15,15 @@
 #  updated_at         :datetime         not null
 #  description        :text
 #  color              :string
+#  archived           :boolean          default(FALSE)
 #
 
 class Item < ActiveRecord::Base
   validates :name, :consultant, presence: true
   belongs_to :consultant, class_name: 'User'
   has_many :sizes, class_name: 'ItemSize'
+  has_many :sale_items
+  has_many :sales, through: :sale_items, source: :sale
 
   default_scope { where(archived: false) }
 
