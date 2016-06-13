@@ -12,7 +12,7 @@ class ItemsController < ApplicationController
 
   def remove_size
     @item = current_user.items.find(params[:id])
-    @item.sizes.where(size_id: params[:size_id]).first.delete
+    @item.sizes.where(size: params[:size_id]).first.try(:delete)
     redirect_to @item
   end
 

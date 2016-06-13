@@ -1,7 +1,14 @@
-<div class="col-md-6">
+<div class="col-md-4">
+  <img src="<%= @item.photo.url(:medium) %>">
+</div>
+
+<div class="col-md-4">
   <%= link_to "Edit", edit_item_path(@item) %>
   <h1><%= @item.name %></h1>
   <p><%= @item.description %></p>
+</div>
+
+<div class="col-md-4">
   <h4>Sizes</h4>
   <table class="table table-striped">
     <thead>
@@ -36,7 +43,4 @@
       <% end %>
     </tbody>
   </table>
-</div>
-<div class="col-md-6">
-  <img src="<%= @item.photo.url(:medium) %>">
 </div>
