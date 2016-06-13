@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
 
   def oauth_params
     auth = env['omniauth.auth']
-    {
+    par = {
       email: auth.fetch(:info, {}).fetch(:email, nil),
       provider: auth.fetch(:provider, ''),
       uid: auth.fetch(:uid, nil),
@@ -25,5 +25,7 @@ class SessionsController < ApplicationController
       first_name: auth.fetch(:info, '').fetch(:name, '').split(' ').first,
       last_name: auth.fetch(:info, '').fetch(:name, '').split(' ').last
     }
+    logger.info par
+    par
   end
 end
