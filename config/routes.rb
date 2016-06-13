@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root to: 'static_pages#root'
   get 'welcome', to: 'static_pages#welcome'
+  get 'login', to: 'static_pages#login'
   get 'privacy', to: 'static_pages#terms'
   get 'terms', to: 'static_pages#privacy'
 
