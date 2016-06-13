@@ -3,6 +3,19 @@ class ItemsController < ApplicationController
     @item = Item.new
   end
 
+  def add_size
+    @item = current_user.items.find(params[:id])
+    @item.sizes << ItemSize.new(size: Integer(params[:size_id]))
+    @item.save
+    redirect_to @item
+  end
+
+  def remove_size
+    @item = current_user.items.find(params[:id])
+    @item.sizes.where(size_id: params[:size_id]).first.delete
+    redirect_to @item
+  end
+
   def create
     @item = current_user.items.new(item_params)
     if @item.save
@@ -40,6 +53,6 @@ class ItemsController < ApplicationController
   def item_params
     params
       .require(:item)
-      .permit(:name, :collection_id, :public)
+      .permit(:photo, :name, :description, :collection_id, :public)
   end
 end

@@ -1,9 +1,18 @@
-<h1>Items#index</h1>
+<h1>RoeMe Inventory</h1>
 
-<ul>
+<ul class="list-group">
   <% @items.each do |item| %>
-    <li><%= item.name %></li>
+    <li class="list-group-item">
+      <%= link_to item.name, item %>
+      <% ItemSize.sizes.keys.each do |size| %>
+        <span class="label">
+          <%= size %><%= item.sizes.where(size: size).count %>
+        </span>
+      <% end %>
+    </li>
   <% end %>
 </ul>
 
-<%= link_to "Add Item", new_item_path %>
+<a href="<%= new_item_path %>" class="btn btn-primary">
+  Add Item
+</a>

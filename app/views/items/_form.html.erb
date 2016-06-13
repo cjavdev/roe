@@ -4,33 +4,44 @@
     <div class="box box-warning">
       <div class="box-header with-border">
         <h3 class="box-title">Item Details</h3>
+        <% if flash.now[:errors] %>
+          <% flash.now[:errors].each do |e| %>
+            <%= e %> <br>
+          <% end %>
+        <% end %>
       </div>
       <div class="box-body">
-        <form action="<%= action %>" method="POST" role="form">
+        <form action="<%= action %>" method="POST" enctype="multipart/form-data" role="form">
           <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
           <% if @item.persisted? %>
             <input type="hidden" name="_method" value="PATCH" />
           <% end %>
+
+          <div class="form-group">
+            <label for="photo">Photo</label>
+            <input id="photo" name="item[photo]" type="file">
+          </div>
+
           <div class="form-group">
             <label>Name</label>
-            <input name="item[name]" type="text" class="form-control" placeholder="Randy">
+            <input name="item[name]" type="text" class="form-control" placeholder="Randy" value="<%= @item.name %>">
           </div>
 
           <div class="form-group">
             <label>Description</label>
-            <textarea name="item[description]" class="form-control" rows="3" placeholder="Nice Leggings ;) ..."></textarea>
+            <textarea name="item[description]" class="form-control" rows="3" placeholder="Nice Leggings ;) ..."><%= @item.description %></textarea>
           </div>
 
           <div class="form-group">
             <div class="radio">
               <label>
-                <input type="radio" name="item[public]" id="optionsRadios1" value="true" checked="">
+                <input type="radio" name="item[public]" id="optionsRadios1" value="true" <%= 'checked' if @item.public %>>
                 <strong>Public</strong> (Buy this!)
               </label>
             </div>
             <div class="radio">
               <label>
-                <input type="radio" name="item[public]" id="optionsRadios2" value="false">
+                <input type="radio" name="item[public]" id="optionsRadios2" value="false" <%= 'checked' unless @item.public %>>
                 <strong>Private</strong> (This one's a secret ;))
               </label>
             </div>
